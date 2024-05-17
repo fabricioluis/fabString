@@ -18,4 +18,7 @@ int main() {
 
   b = substr(a, 5, 9);
   printf("%s\n", b);
+
+  b = strpart(a, "?", "&");
+  printf("%s\n", b);
 }
