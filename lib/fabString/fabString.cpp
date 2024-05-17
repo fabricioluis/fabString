@@ -21,7 +21,8 @@ void impint2bin(int b, int bits) {
     else
       printf("0");
 
-    if ((bits % 8) == 0) printf(" ");
+    if ((bits % 8) == 0)
+      printf(" ");
 
   } while (bits > 0);
   printf("- %d", b);
@@ -59,7 +60,8 @@ char *int2bin(int numero, int bits) {
 
   *(resultado + posicao++) = numero + '0';
 
-  for (; posicao < bits; posicao++) *(resultado + posicao) = '0';
+  for (; posicao < bits; posicao++)
+    *(resultado + posicao) = '0';
 
   posicao--;
 
@@ -68,7 +70,8 @@ char *int2bin(int numero, int bits) {
 
   tamanho = strlen(inverte_resultado);
 
-  if (tamanho % 8 != 0) tamanho = (round(tamanho / 8) + 1) * 8;
+  if (tamanho % 8 != 0)
+    tamanho = (round(tamanho / 8) + 1) * 8;
 
   strcpy(resultado, "");
 
@@ -139,7 +142,8 @@ char *strltrim(char *str1) {
         break;
       }
     }
-    if (j > 0) break;
+    if (j > 0)
+      break;
   }
   resultado = substr(str1, j + 1, strlen(str1) - j);
 
@@ -166,7 +170,8 @@ char *strrtrim(char *str1) {
         break;
       }
     }
-    if (j > 0) break;
+    if (j > 0)
+      break;
   }
   resultado = substr(str1, 1, j);
   return resultado;
@@ -214,10 +219,10 @@ int strpos(char *str1, const char *str2) {
       if (*(str1 + i) == *(str2 + j)) {
         j++;
 
-        if (posicao == 0)  // marca a primeira aparicao
+        if (posicao == 0) // marca a primeira aparicao
           posicao = i + 1;
 
-        if (j == strlen(str2))  // varreu ate o tamanho de found, entao para.
+        if (j == strlen(str2)) // varreu ate o tamanho de found, entao para.
           break;
       } else {
         posicao = 0;
@@ -285,16 +290,20 @@ char *strSoNumero(char *str1) {
  * string. Retira da string de resultado inclusive a posicao pos.
  */
 char *substrend(char *str1, int pos) {
-  char *retorno = (char *)malloc(64 * sizeof(char));
+  size_t tamStr1 = strlen(str1);
+
+  if (pos > tamStr1)
+    return NULL;
+
+  size_t tamRetorno = (tamStr1 - pos) + 1;
+
+  char *retorno = (char *)malloc(tamRetorno * sizeof(char));
   pos--;
-  int ct = 1;
 
-  for (int i = 0; i < strlen(str1) - pos; i++) {
-    *(retorno + i) = str1[pos + i];
-    ct++;
-  }
+  for (int i = 0; i < tamRetorno; i++)
+    *(retorno + i) = *(str1 + pos + i);
 
-  *(retorno + ct) = '\0';
+  *(retorno + tamRetorno) = '\0';
   return retorno;
 }
 
@@ -305,10 +314,21 @@ char *substrend(char *str1, int pos) {
  * Primeira posicao = 1
  */
 char *substr(char *str1, int pos, int tam) {
-  char *retorno = (char *)malloc(64 * sizeof(char));
+  size_t tamStr1 = strlen(str1);
+
+  // se tamanho ou a posicao forem maiores que a str1 retorna NULL
+  if ((tam > tamStr1) || (pos > tamStr1) || ((tam + pos) > tamStr1))
+    return NULL;
+
+  // aloca o tamanho da memoria de acordo com o tamanho do retorno.
+  char *retorno = (char *)malloc((tam) * sizeof(char));
+  if (!retorno)
+    return NULL;
+
   pos--;
 
-  for (int i = 0; i < tam; i++) *(retorno + i) = str1[pos + i];
+  for (int i = 0; i < tam; i++)
+    *(retorno + i) = *(str1 + pos + i);
 
   *(retorno + tam) = '\0';
   return retorno;

@@ -16,9 +16,15 @@ int main() {
 
   printf("%s\n", a);
 
-  b = substr(a, 5, 9);
-  printf("%s\n", b);
+  b = substr(a, 5, 4);
+  if (b)
+    printf("%s - %ld\n", b, strlen(b));
 
   b = strpart(a, "?", "&");
-  printf("%s\n", b);
+  if (b)
+    printf("%s\n", b);
+
+  b = substrend(a, 30);
+  if (b)
+    printf("%s\n", b);
 }
