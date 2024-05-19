@@ -1,7 +1,8 @@
 #include "lib/fabString/fabString.h"
 #include <stdio.h>
 
-int main() {
+int main()
+{
   printf("Teste total com lib fabString.\n");
 
   char *a = (char *)malloc(50 * sizeof(char));
@@ -12,19 +13,38 @@ int main() {
   // 1234567890123456789012345678901234567890
   // GET /inclusao?nome=Maria&valor=123
 
-  strcpy(a, "GET /inclusao?nome=Maria&valor=123");
-
+  strcpy(a, "abcd");
   printf("%s\n", a);
 
-  b = substr(a, 5, 4);
-  if (b)
-    printf("%s - %ld\n", b, strlen(b));
+  size_t tam = strlen(a);
 
-  b = strpart(a, "?", "&");
-  if (b)
-    printf("%s\n", b);
+  printf("*** - substr\n");
+  for (size_t i = 1; i <= tam; i++)
+  {
+    printf("%zu - %s\n", i, substr(a, 1, i));
+  }
 
-  b = substrend(a, 30);
-  if (b)
-    printf("%s\n", b);
+  printf("\n*** - substrend\n");
+  for (size_t i = 1; i <= tam; i++)
+  {
+    printf("%zu - %s\n", i, substrend(a, i));
+  }
+
+  printf("\n*** - strSoNumero\n");
+  strcpy(a, "GET /inclusao?nome=Maria&valor=123");
+  printf("%s - %s\n", a, strSoNumero(a));
+
+  /*
+    b = substr(a, 5, 4);
+    if (b)
+      printf("%s - %ld\n", b, strlen(b));
+
+    b = strpart(a, "?", "&");
+    if (b)
+      printf("%s\n", b);
+
+    b = substrend(a, 30);
+    if (b)
+      printf("%s\n", b);
+  */
 }

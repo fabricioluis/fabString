@@ -7,10 +7,10 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "lib/fabString/fabString.cpp",
-                "main.cpp",
+                "${workspaceFolder}/main.cpp",
+                "${workspaceFolder}/lib/fabString/fabString.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${workspaceFolder}/main"
             ],
             "options": {
                 "cwd": "${fileDirname}"
