@@ -3,15 +3,15 @@
 #include "lib/fabString/fabString.h"
 
 int main() {
+  //           1         2         3         4
+  // 01234567890123456789012345678901234567890
+  // GET /inclusao?nome=Maria&valor=123
+
   printf("Teste total com lib fabString.\n");
 
   char *a = (char *)malloc(50 * sizeof(char));
   char *b = (char *)malloc(50 * sizeof(char));
-  char *temp = (char *)malloc(50 * sizeof(char));
-
-  //          1         2         3         4
-  // 1234567890123456789012345678901234567890
-  // GET /inclusao?nome=Maria&valor=123
+  char *c;
 
   strcpy(a, "abcd");
   printf("%s\n", a);
@@ -28,21 +28,20 @@ int main() {
     printf("%zu - %s\n", i, substrend(a, i));
   }
 
-  printf("\n*** - strSoNumero\n");
   strcpy(a, "GET /inclusao?nome=Maria&valor=123");
+
+  printf("\n*** - strSoNumero\n");
   printf("%s - %s\n", a, strSoNumero(a));
 
+  c = strpart(a, "?", "a&");
+  printf("%s\n", c);
+
   /*
-        b = substr(a, 5, 4);
-        if (b)
-          printf("%s - %ld\n", b, strlen(b));
+    b = strpart(a, "/", "?");
+    if (b) printf("%s\n", b);
+    free(b);
 
-        b = strpart(a, "?", "&");
-        if (b)
-          printf("%s\n", b);
-
-        b = substrend(a, 30);
-        if (b)
-          printf("%s\n", b);
-      */
+    c = substr(a, 2, 5);
+    if (c) printf("%s\n", c);
+  */
 }

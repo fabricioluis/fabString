@@ -178,71 +178,57 @@ char *strrtrim(char *str1) {
  * Retorna parte da String str1 que esta entre str2 e str3.
  */
 char *strpart(char *str1, const char *str2, const char *str3) {
-  char *resultado = NULL;
+  // Pega a posicao final da String 2
+  int posStr2_F = strposf(str1, str2);
 
-  int posFinalStr2 = strposf(str1, str2);
+  // Pega a posicao inicial da String 3
+  int posStr3_I = strpos(str1, str3);
 
-  // extrai o final da str1 a partir do final de str2
-  char *strTemp = substrend(str1, posFinalStr2);
+  char *retorno = (char *)malloc((posStr3_I - posStr2_F) * sizeof(char));
+  if (!retorno) return NULL;
 
-  int posInicialStr3 = strpos(strTemp, str3);
-  if (posInicialStr3 == 0)
-    resultado = strTemp;
-  else {
-    posInicialStr3 = posInicialStr3 + posFinalStr2 - 1;
-    resultado = substr(str1, posFinalStr2, posInicialStr3 - posFinalStr2);
+  int ct = 0;
+  while (posStr2_F < posStr3_I) {
+    *(retorno + ct) = *(str1 + posStr2_F);
+    ct++;
+    posStr2_F++;
   }
 
-  return resultado;
+  return retorno;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//
 /*
  * Funcao strpos (char *str1, char *str2)
- * Retorna a posicao do inicio de str2 em str1; O primeiro caractere eh 1
+ * Retorna a posicao do inicio de str2 em str1; O primeiro caractere eh 0
  * str1 - string a ser varrida
  * str2 - string a ser encontrada em str1
- * Senao encontrar retorna 0.
+ * Senao encontrar, retorna -1.
  */
 int strpos(char *str1, const char *str2) {
-  int posicao = 0;
-  int i = 0;
-  int j = 0;
+  char *pos = strstr(str1, str2);
 
-  if (strstr(str1, str2) != NULL) {
-    for (i = 0; i < strlen(str1); i++) {
-      if (*(str1 + i) == *(str2 + j)) {
-        j++;
+  // Se achou, calcula a posicao
+  if (pos != NULL) return pos - str1;
 
-        if (posicao == 0)  // marca a primeira aparicao
-          posicao = i + 1;
-
-        if (j == strlen(str2))  // varreu ate o tamanho de found, entao para.
-          break;
-      } else {
-        posicao = 0;
-        j = 0;
-      }
-    }
-  }
-
-  return posicao;
+  return -1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//
 /*
  * Funcao strposf (char *str1, char *str2)
- * Retorna a posicao final da String str2 dentro da String str1
+ * Retorna a posicao apos o final da String str2 dentro da String str1
+ * Se nao encontrar, retorna -1.
  */
 int strposf(char *str1, const char *str2) {
-  int resultado = strpos(str1, str2);
+  int retorno = strpos(str1, str2);
 
-  if (resultado == 0)
-    resultado = 0;
+  if (retorno == -1)
+    retorno = -1;
   else
-    resultado = resultado + strlen(str2);
+    retorno = retorno + strlen(str2);
 
-  return resultado;
+  return retorno;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//
