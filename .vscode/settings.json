@@ -3,4 +3,5 @@
     "clang-format.executable": "/usr/bin/clang-format",
     "clang-format.style": "file",
     "clang-format.fallbackStyle": "Google",
+    "cmake.configureOnOpen": false,
 }
