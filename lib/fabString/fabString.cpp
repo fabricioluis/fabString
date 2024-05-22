@@ -184,6 +184,8 @@ char *strpart(char *str1, const char *str2, const char *str3) {
   // Pega a posicao inicial da String 3
   int posStr3_I = strpos(str1, str3);
 
+  if ((posStr2_F == -1) || (posStr2_F > posStr3_I)) return NULL;
+
   char *retorno = (char *)malloc((posStr3_I - posStr2_F) * sizeof(char));
   if (!retorno) return NULL;
 

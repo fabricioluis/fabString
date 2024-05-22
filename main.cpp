@@ -30,18 +30,7 @@ int main() {
 
   strcpy(a, "GET /inclusao?nome=Maria&valor=123");
 
-  printf("\n*** - strSoNumero\n");
-  printf("%s - %s\n", a, strSoNumero(a));
-
-  c = strpart(a, "?", "a&");
-  printf("%s\n", c);
-
-  /*
-    b = strpart(a, "/", "?");
-    if (b) printf("%s\n", b);
-    free(b);
-
-    c = substr(a, 2, 5);
-    if (c) printf("%s\n", c);
-  */
+  b = strpart(a, "?", "ddd");
+  if (b) printf("%s\n", b);
+  free(b);
 }
