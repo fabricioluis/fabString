@@ -152,24 +152,27 @@ char *strltrim(char *str1) {
  * Retorna a String str1 sem os espacos em branco aa direita.
  */
 char *strrtrim(char *str1) {
-  const char *alfabeto =
-      "abcçdefghijklnmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.;:?[]!@"
-      "#$%&*()-_=+{}\\|/<>";
-  char *resultado = (char *)malloc(strlen(str1));
-  int i = 0;
-  int j = 0;
+  size_t tam = strlen(str1);
+  char *retorno = (char *)malloc(tam * sizeof(char));
+  if (retorno == NULL) return NULL;
 
-  for (i = strlen(str1) - 1; i > 0; i--) {
-    for (int alf = 0; alf < strlen(alfabeto); alf++) {
-      if (*(str1 + i) == *(alfabeto + alf)) {
-        j = i + 1;
-        break;
-      }
+  int i = 0;
+  for (i = 0; i < tam; i++) *(retorno + i) = ' ';
+
+  bool achou = false;
+  i = tam - 1;
+
+  while (i >= 0) {
+    if ((*(str1 + i) != ' ') && (!achou)) {
+      *(retorno + i + 1) = '\0';
+      achou = true;
     }
-    if (j > 0) break;
+    if (achou) *(retorno + i) = *(str1 + i);
+
+    i--;
   }
-  resultado = substr(str1, 1, j);
-  return resultado;
+
+  return retorno;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//

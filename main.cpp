@@ -33,4 +33,9 @@ int main() {
   b = strpart(a, "?", "ddd");
   if (b) printf("%s\n", b);
   free(b);
+
+  strcpy(a, " b a ");
+  b = strrtrim(a);
+  if (b) printf("%s - %ld\n", b, strlen(b));
+  free(b);
 }
