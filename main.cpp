@@ -1,8 +1,15 @@
 #include <stdio.h>
+#include <sys/sysinfo.h>
+
+#include <iomanip>
+#include <iostream>
 
 #include "lib/fabString/fabString.h"
 
+void getMemoryInfo();
+
 int main() {
+  getMemoryInfo();
   //           1         2         3         4
   // 01234567890123456789012345678901234567890
   // GET /inclusao?nome=Maria&valor=123
@@ -32,10 +39,27 @@ int main() {
 
   b = strpart(a, "?", "ddd");
   if (b) printf("%s\n", b);
-  free(b);
+  // free(b);
 
   strcpy(a, " b a ");
+
   b = strrtrim(a);
+  getMemoryInfo();
+
   if (b) printf("%s - %ld\n", b, strlen(b));
   free(b);
+}
+
+void getMemoryInfo() {
+  long long totalRAM;
+  long long freeRAM;
+
+  struct sysinfo si;
+  sysinfo(&si);
+
+  totalRAM = si.totalram;
+  freeRAM = si.freeram;
+
+  printf("%lld\n", totalRAM);
+  printf("%lld\n", freeRAM);
 }
