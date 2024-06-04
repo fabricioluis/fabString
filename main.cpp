@@ -6,6 +6,7 @@
 
 #include "lib/fabString/fabString.h"
 
+void printNum(long long numero);
 void getMemoryInfo();
 
 int main() {
@@ -60,6 +61,12 @@ void getMemoryInfo() {
   totalRAM = si.totalram;
   freeRAM = si.freeram;
 
-  printf("%lld\n", totalRAM);
-  printf("%lld\n", freeRAM);
+  printNum(totalRAM);
+  printNum(freeRAM);
+}
+
+void printNum(long long numero) {
+  printf("%3lld.%3lld.%3lld.%3lld\n", numero / 1000000000,
+         (numero % 1000000000) / 1000000, (numero % 1000000) / 1000,
+         numero % 1000);
 }
