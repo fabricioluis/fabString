@@ -9,7 +9,8 @@
 void printNum(long long numero);
 void getMemoryInfo();
 
-int main() {
+int main()
+{
   getMemoryInfo();
   //           1         2         3         4
   // 01234567890123456789012345678901234567890
@@ -19,7 +20,6 @@ int main() {
 
   char *a = (char *)malloc(50 * sizeof(char));
   char *b = (char *)malloc(50 * sizeof(char));
-  char *c;
 
   strcpy(a, "abcd");
   printf("%s\n", a);
@@ -27,19 +27,22 @@ int main() {
   size_t tam = strlen(a);
 
   printf("*** - substr\n");
-  for (size_t i = 1; i <= tam; i++) {
+  for (size_t i = 1; i <= tam; i++)
+  {
     printf("%zu - %s\n", i, substr(a, 0, i));
   }
 
   printf("\n*** - substrend\n");
-  for (size_t i = 0; i < tam; i++) {
+  for (size_t i = 0; i < tam; i++)
+  {
     printf("%zu - %s\n", i, substrend(a, i));
   }
 
   strcpy(a, "GET /inclusao?nome=Maria&valor=123");
 
   b = strpart(a, "?", "ddd");
-  if (b) printf("%s\n", b);
+  if (b)
+    printf("%s\n", b);
   // free(b);
 
   strcpy(a, " b a ");
@@ -47,11 +50,13 @@ int main() {
   b = strrtrim(a);
   getMemoryInfo();
 
-  if (b) printf("%s - %ld\n", b, strlen(b));
+  if (b)
+    printf("%s - %ld\n", b, strlen(b));
   free(b);
 }
 
-void getMemoryInfo() {
+void getMemoryInfo()
+{
   long long totalRAM;
   long long freeRAM;
 
@@ -65,7 +70,8 @@ void getMemoryInfo() {
   printNum(freeRAM);
 }
 
-void printNum(long long numero) {
+void printNum(long long numero)
+{
   printf("%3lld.%3lld.%3lld.%3lld\n", numero / 1000000000,
          (numero % 1000000000) / 1000000, (numero % 1000000) / 1000,
          numero % 1000);
