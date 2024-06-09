@@ -2,7 +2,7 @@
 
 /*
  * Autor: Fabricio Luis
- * Versao: 221002.1259
+ * Versao: 240609.1535
  * fabString.c
  */
 
@@ -13,22 +13,31 @@
  * Funcao impint2bin (int b, int bits)
  * Imprime em binario o valor de b na quantidade de bits.
  */
-void impint2bin(int b, int bits)
+void int2bin(int numero, int qtdeBits, int bits)
 {
+  // int qtdeBits = ((int)(b / 256) + 1) * 8;
+  int tam = qtdeBits + (int)((qtdeBits / bits));
+  char *retorno = (char *)malloc(sizeof(char) * tam);
+  int pos = 0;
+
   do
   {
-    bits--;
-    if ((b >> bits) & 1)
-      printf("1");
+    qtdeBits--;
+    if ((numero >> qtdeBits) & 1)
+      *(retorno + pos) = '1';
     else
-      printf("0");
+      *(retorno + pos) = '0';
+    pos++;
 
-    if ((bits % 8) == 0)
-      printf(" ");
-
-  } while (bits > 0);
-  printf("- %d", b);
-  printf("\n");
+    if (((qtdeBits % bits) == 0) && (qtdeBits != 0))
+    {
+      *(retorno + pos) = ' ';
+      pos++;
+    }
+  } while (qtdeBits > 0);
+  *(retorno + pos) = '\0';
+  printf("%s (%d)\n", retorno, numero);
+  free(retorno);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//
@@ -38,62 +47,10 @@ void impint2bin(int b, int bits)
  */
 void impAscii(char *str1)
 {
-  for (int i = 0; i < strlen(str1); i++)
+  for (size_t i = 0; i < strlen(str1); i++)
   {
     printf("%c : %d\n", *(str1 + i), (int)*(str1 + i));
   }
-}
-
-//-------------------------------------------------------------------------------------------------------------------------//
-/*
- * Funcao int2bin (int numero, int bits)
- * Converte um valor inteiro em binario e mostra em bloco de 8 bits
- */
-char *int2bin(int numero, int bits)
-{
-  int posicao = 0;
-  int tamanho = 0;
-
-  char *resultado = (char *)malloc(64);
-  char *inverte_resultado = (char *)malloc(64);
-  char *saida = (char *)malloc(64);
-
-  do
-  {
-    *(resultado + posicao++) = (numero % 2) + '0';
-    numero = numero >> 1;
-  } while (numero >= 2);
-
-  *(resultado + posicao++) = numero + '0';
-
-  for (; posicao < bits; posicao++)
-    *(resultado + posicao) = '0';
-
-  posicao--;
-
-  for (int index = 0; index <= posicao; index++)
-    *(inverte_resultado + index) = *(resultado + posicao - index);
-
-  tamanho = strlen(inverte_resultado);
-
-  if (tamanho % 8 != 0)
-    tamanho = (round(tamanho / 8) + 1) * 8;
-
-  strcpy(resultado, "");
-
-  for (int i = 1; i <= (tamanho - strlen(inverte_resultado)); i++)
-    strcat(resultado, "0");
-
-  strcat(resultado, inverte_resultado);
-
-  strcpy(saida, "");
-  for (int i = 1; i <= tamanho; i += 8)
-  {
-    strcat(saida, substr(resultado, i, 8));
-    strcat(saida, " ");
-  }
-
-  return saida;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//
@@ -103,26 +60,35 @@ char *int2bin(int numero, int bits)
  */
 char *stralltrim(char *str1)
 {
-  const char *alfabeto =
-      "abcçdefghijklnmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.;:?[]!@"
-      "#$%&*()-_=+{}\\|/<>";
-  char *resultado = (char *)malloc(strlen(str1));
-  int j = 0;
+  // const char *alfabeto =
+  //     "abcçdefghijklnmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.;:?[]!@"
+  //     "#$%&*()-_=+{}\\|/<>";
 
-  for (int i = 0; i < strlen(str1); i++)
+  // conta quantos espacos tem a str1.
+  int ctEspaco = 0;
+  for (size_t i = 0; i < strlen(str1); i++)
   {
-    for (int alf = 0; alf < strlen(alfabeto); alf++)
-    {
-      if (*(str1 + i) == *(alfabeto + alf))
-      {
-        *(resultado + j) = *(str1 + i);
-        j++;
-        break;
-      }
-    }
+    if (*(str1 + i) == ' ')
+      ctEspaco++;
   }
 
-  return resultado;
+  int tam = strlen(str1);
+  int j = 0;
+
+  // Define tamanho do retorno a str1 sem os espacos.
+  char *retorno = (char *)malloc(tam - ctEspaco + 1);
+
+  for (size_t i = 0; i < strlen(str1); i++)
+  {
+    if (*(str1 + i) != ' ')
+    {
+      *(retorno + j) = *(str1 + i);
+      j++;
+    }
+  }
+  *(retorno + j) = '\0';
+
+  return retorno;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//
@@ -140,10 +106,6 @@ char *strlrtrim(char *str1) { return (strltrim(strrtrim(str1))); }
  */
 char *strltrim(char *str1)
 {
-  // const char *alfabeto =
-  //     "abcçdefghijklnmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.;:?[]!@"
-  //     "#$%&*()-_=+{}\\|/<>";
-
   char *retorno = (char *)malloc(strlen(str1));
   int j = 0;
 

@@ -1,6 +1,6 @@
 /*
  * Autor: Fabricio Luis
- * Versao: 221002.1259
+ * Versao: 240609.1535
  * fabString.h
  */
 
@@ -9,11 +9,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-void impint2bin(int b, int bits);
+void int2bin(int numero, int qtdeBits, int bits);
 
 void impAscii(char *str1);
-
-char *int2bin(int numero, int bits);
 
 char *stralltrim(char *str1);
 

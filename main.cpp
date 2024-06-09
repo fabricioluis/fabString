@@ -61,10 +61,16 @@ int main()
     printf("%s (%zu)\n", b, strlen(b));
   */
 
-  strcpy(a, "  a b c  ");
+  strcpy(a, " Aa Bb Cc ");
   printf("%s (%zu)\n", a, strlen(a));
-  b = strlrtrim(a);
+  b = stralltrim(a);
   printf("%s (%zu)\n", b, strlen(b));
+  impAscii(a);
+
+  int2bin(65535, 32, 4);
+  int2bin(65536, 32, 4);
+
+  getMemoryInfo();
   free(a);
   free(b);
 
