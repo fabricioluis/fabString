@@ -140,29 +140,30 @@ char *strlrtrim(char *str1) { return (strltrim(strrtrim(str1))); }
  */
 char *strltrim(char *str1)
 {
-  const char *alfabeto =
-      "abcçdefghijklnmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.;:?[]!@"
-      "#$%&*()-_=+{}\\|/<>";
-  char *resultado = (char *)malloc(strlen(str1));
-  int i = 0;
+  // const char *alfabeto =
+  //     "abcçdefghijklnmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.;:?[]!@"
+  //     "#$%&*()-_=+{}\\|/<>";
+
+  char *retorno = (char *)malloc(strlen(str1));
   int j = 0;
 
-  for (i = 0; i < strlen(str1); i++)
+  bool achou = false;
+  for (size_t i = 0; i < strlen(str1); i++)
   {
-    for (int alf = 0; alf < strlen(alfabeto); alf++)
+    if (*(str1 + i) != ' ')
     {
-      if (*(str1 + i) == *(alfabeto + alf))
-      {
-        j = i;
-        break;
-      }
+      achou = true;
     }
-    if (j > 0)
-      break;
-  }
-  resultado = substr(str1, j + 1, strlen(str1) - j);
 
-  return resultado;
+    if (achou)
+    {
+      *(retorno + j) = *(str1 + i);
+      j++;
+    }
+  }
+  *(retorno + j) = '\0';
+
+  return retorno;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//
@@ -177,12 +178,8 @@ char *strrtrim(char *str1)
   if (retorno == NULL)
     return NULL;
 
-  int i = 0;
-  for (i = 0; i < tam; i++)
-    *(retorno + i) = ' ';
-
   bool achou = false;
-  i = tam - 1;
+  int i = tam - 1;
 
   while (i >= 0)
   {
@@ -242,12 +239,10 @@ char *strpart(char *str1, const char *str2, const char *str3)
 int strpos(char *str1, const char *str2)
 {
   char *pos = strstr(str1, str2);
+  if (pos == NULL)
+    return -1;
 
-  // Se achou, calcula a posicao
-  if (pos != NULL)
-    return pos - str1;
-
-  return -1;
+  return pos - str1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//
@@ -263,21 +258,9 @@ int strposf(char *str1, const char *str2)
   if (retorno == -1)
     retorno = -1;
   else
-    retorno = retorno + strlen(str2);
+    retorno += strlen(str2);
 
   return retorno;
-}
-
-//-------------------------------------------------------------------------------------------------------------------------//
-/*
- * Funcao int str2int(char *str1);
- * Converter em inteiro a String str1.
- */
-int str2int(char *str1)
-{
-  char a[strlen(str1)];
-  sprintf(a, "%d", atoi(str1));
-  return atoi(a);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------//
@@ -317,6 +300,9 @@ char *strSoNumero(char *str1)
  */
 char *substrend(char *str1, int pos)
 {
+  if (pos == 0)
+    return str1;
+
   size_t tamStr1 = strlen(str1);
 
   if (pos > tamStr1)

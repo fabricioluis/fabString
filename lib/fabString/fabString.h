@@ -25,11 +25,9 @@ char *strlrtrim(char *str1);
 
 char *strpart(char *str1, const char *str2, const char *str3);
 
-int strpos(char *string, const char *found);
+int strpos(char *str1, const char *str2);
 
 int strposf(char *str1, const char *str2);
-
-int str2int(char *str1);
 
 char *strSoNumero(char *str1);
 

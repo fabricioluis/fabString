@@ -5,54 +5,70 @@
 #include <iostream>
 
 #include "lib/fabString/fabString.h"
+#include "../../../../../usr/include/x86_64-linux-gnu/sys/time.h"
 
 void printNum(long long numero);
 void getMemoryInfo();
+double get_microseconds();
+
+//           1         2         3         4
+// 01234567890123456789012345678901234567890
+// GET /inclusao?nome=Maria&valor=123
 
 int main()
 {
   getMemoryInfo();
-  //           1         2         3         4
-  // 01234567890123456789012345678901234567890
-  // GET /inclusao?nome=Maria&valor=123
-
-  printf("Teste total com lib fabString.\n");
 
   char *a = (char *)malloc(50 * sizeof(char));
   char *b = (char *)malloc(50 * sizeof(char));
 
-  strcpy(a, "abcd");
-  printf("%s\n", a);
+  // Jah testadas.
+  // substr
+  // substrend
+  // strpart
+  // strposf e strposf
+  // strrtrim, strltrim e strlrtrim
 
-  size_t tam = strlen(a);
+  /*
+    strcpy(a, "abcd");
+    printf("%s\n", a);
 
-  printf("*** - substr\n");
-  for (size_t i = 1; i <= tam; i++)
-  {
-    printf("%zu - %s\n", i, substr(a, 0, i));
-  }
+    size_t tam = strlen(a);
 
-  printf("\n*** - substrend\n");
-  for (size_t i = 0; i < tam; i++)
-  {
-    printf("%zu - %s\n", i, substrend(a, i));
-  }
+    printf("*** - substr\n");
+    for (size_t i = 1; i <= tam; i++)
+    {
+      printf("%zu - %s\n", i, substr(a, 0, i));
+    }
 
-  strcpy(a, "GET /inclusao?nome=Maria&valor=123");
+    printf("\n*** - substrend\n");
+    for (size_t i = 0; i < tam; i++)
+    {
+      printf("%zu - %s\n", i, substrend(a, i));
+    }
 
-  b = strpart(a, "?", "ddd");
-  if (b)
-    printf("%s\n", b);
-  // free(b);
+    strcpy(a, "GET /inclusao?nome=Maria&valor=123");
+    b = strpart(a, "nome=", "a&v");
+    if (b)
+      printf("%s (%zu)\n", b, strlen(b));
+    free(b);
 
-  strcpy(a, " b a ");
+    int i = strposf(a, "/in");
+    printf("i = %d\n", i);
 
-  b = strrtrim(a);
-  getMemoryInfo();
+    strcpy(a, "abc  d ");
+    b = strrtrim(a);
+    printf("%s (%zu)\n", b, strlen(b));
+  */
 
-  if (b)
-    printf("%s - %ld\n", b, strlen(b));
+  strcpy(a, "  a b c  ");
+  printf("%s (%zu)\n", a, strlen(a));
+  b = strlrtrim(a);
+  printf("%s (%zu)\n", b, strlen(b));
+  free(a);
   free(b);
+
+  printf("...Fim...\n");
 }
 
 void getMemoryInfo()
@@ -75,4 +91,16 @@ void printNum(long long numero)
   printf("%3lld.%3lld.%3lld.%3lld\n", numero / 1000000000,
          (numero % 1000000000) / 1000000, (numero % 1000000) / 1000,
          numero % 1000);
+}
+
+double get_microseconds()
+{
+  struct timeval tv;
+
+  gettimeofday(&tv, NULL);
+
+  double seconds = (double)tv.tv_sec;
+  double micros = (double)tv.tv_usec / 1000000;
+
+  return seconds + micros;
 }
