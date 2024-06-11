@@ -29,24 +29,24 @@ int main()
   // strposf e strposf
   // strrtrim, strltrim e strlrtrim
 
+  strcpy(a, "abcd");
+  printf("%s\n", a);
+
+  size_t tam = strlen(a);
+
+  printf("*** - substr\n");
+  for (size_t i = 1; i <= tam; i++)
+  {
+    printf("%zu - %s\n", i, substr(a, 0, i));
+  }
+
+  printf("\n*** - substrend\n");
+  for (size_t i = 0; i < tam; i++)
+  {
+    printf("%zu - %s\n", i, substrend(a, i));
+  }
+
   /*
-    strcpy(a, "abcd");
-    printf("%s\n", a);
-
-    size_t tam = strlen(a);
-
-    printf("*** - substr\n");
-    for (size_t i = 1; i <= tam; i++)
-    {
-      printf("%zu - %s\n", i, substr(a, 0, i));
-    }
-
-    printf("\n*** - substrend\n");
-    for (size_t i = 0; i < tam; i++)
-    {
-      printf("%zu - %s\n", i, substrend(a, i));
-    }
-
     strcpy(a, "GET /inclusao?nome=Maria&valor=123");
     b = strpart(a, "nome=", "a&v");
     if (b)
@@ -59,13 +59,13 @@ int main()
     strcpy(a, "abc  d ");
     b = strrtrim(a);
     printf("%s (%zu)\n", b, strlen(b));
-  */
 
   strcpy(a, " Aa Bb Cc ");
   printf("%s (%zu)\n", a, strlen(a));
   b = stralltrim(a);
   printf("%s (%zu)\n", b, strlen(b));
   impAscii(a);
+  */
 
   int2bin(65535, 32, 4);
   int2bin(65536, 32, 4);

@@ -29,6 +29,6 @@ int strposf(char *str1, const char *str2);
 
 char *strSoNumero(char *str1);
 
-char *substrend(char *str1, int pos);
+char *substrend(char *str1, size_t pos);
 
-char *substr(char *str1, int pos, int tam);
+char *substr(char *str1, size_t pos, size_t tam);

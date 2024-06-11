@@ -260,7 +260,7 @@ char *strSoNumero(char *str1)
  * Retorna um pedaco da str1 que inicia na posicao (pos) e vai ate o final da
  * string. Primeira posicao = 0
  */
-char *substrend(char *str1, int pos)
+char *substrend(char *str1, size_t pos)
 {
   if (pos == 0)
     return str1;
@@ -289,7 +289,7 @@ char *substrend(char *str1, int pos)
  * Retorna um pedaco da String que inicia na posicao (pos) de tamanho (tam)
  * Primeira posicao = 0
  */
-char *substr(char *str1, int pos, int tam)
+char *substr(char *str1, size_t pos, size_t tam)
 {
   size_t tamStr1 = strlen(str1);
 
