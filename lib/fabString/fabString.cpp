@@ -2,7 +2,7 @@
 
 /*
  * Autor: Fabricio Luis
- * Versao: 240609.1535
+ * Versao: 240610.2307
  * fabString.c
  */
 
@@ -163,16 +163,21 @@ char *strrtrim(char *str1)
 /*
  * Funcao strpart (char *str1, char *str2, char *str3)
  * Retorna parte da String str1 que esta entre str2 e str3.
+ * Se achou str2, mas nao achou str3 entao retorna str2 ateh o final da str1.
  */
 char *strpart(char *str1, const char *str2, const char *str3)
 {
   // Pega a posicao final da String 2
   int posStr2_F = strposf(str1, str2);
+  if (posStr2_F == -1)
+    return NULL;
 
-  // Pega a posicao inicial da String 3
+  // Pega a posicao inicial da String 3, senao achou entao vai ateh o final de str1.
   int posStr3_I = strpos(str1, str3);
+  if (posStr3_I == -1)
+    posStr3_I = strlen(str1);
 
-  if ((posStr2_F == -1) || (posStr2_F > posStr3_I))
+  if (posStr2_F > posStr3_I)
     return NULL;
 
   char *retorno = (char *)malloc((posStr3_I - posStr2_F) * sizeof(char));

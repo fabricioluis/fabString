@@ -48,9 +48,11 @@ int main()
   }
 */
   strcpy(a, "GET /printa?nome=Maria HTTP/1.1");
-  b = strpart(a, "/", "?");
+  b = strpart(a, "=", "P/");
   if (b)
     printf("%s (%zu)\n", b, strlen(b));
+  else
+    printf("Nulo\n");
 
   /*
     free(b);
