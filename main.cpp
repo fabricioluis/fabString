@@ -29,6 +29,7 @@ int main()
   // strposf e strposf
   // strrtrim, strltrim e strlrtrim
 
+  /*
   strcpy(a, "abcd");
   printf("%s\n", a);
 
@@ -45,32 +46,32 @@ int main()
   {
     printf("%zu - %s\n", i, substrend(a, i));
   }
-
-  /*
-    strcpy(a, "GET /inclusao?nome=Maria&valor=123");
-    b = strpart(a, "nome=", "a&v");
-    if (b)
-      printf("%s (%zu)\n", b, strlen(b));
-    free(b);
-
-    int i = strposf(a, "/in");
-    printf("i = %d\n", i);
-
-    strcpy(a, "abc  d ");
-    b = strrtrim(a);
+*/
+  strcpy(a, "GET /printa?nome=Maria HTTP/1.1");
+  b = strpart(a, "/", "?");
+  if (b)
     printf("%s (%zu)\n", b, strlen(b));
 
-  strcpy(a, " Aa Bb Cc ");
-  printf("%s (%zu)\n", a, strlen(a));
-  b = stralltrim(a);
-  printf("%s (%zu)\n", b, strlen(b));
-  impAscii(a);
-  */
+  /*
+    free(b);
+
+      int i = strposf(a, "/in");
+      printf("i = %d\n", i);
+
+      strcpy(a, "abc  d ");
+      b = strrtrim(a);
+      printf("%s (%zu)\n", b, strlen(b));
+
+    strcpy(a, " Aa Bb Cc ");
+    printf("%s (%zu)\n", a, strlen(a));
+    b = stralltrim(a);
+    printf("%s (%zu)\n", b, strlen(b));
+    impAscii(a);
 
   int2bin(65535, 32, 4);
   int2bin(65536, 32, 4);
-
   getMemoryInfo();
+*/
   free(a);
   free(b);
 

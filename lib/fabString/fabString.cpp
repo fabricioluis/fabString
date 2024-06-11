@@ -187,6 +187,8 @@ char *strpart(char *str1, const char *str2, const char *str3)
     posStr2_F++;
   }
 
+  *(retorno + ct) = '\0';
+
   return retorno;
 }
 
