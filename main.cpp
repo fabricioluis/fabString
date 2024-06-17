@@ -47,8 +47,15 @@ int main()
     printf("%zu - %s\n", i, substrend(a, i));
   }
 */
-  strcpy(a, "GET /printa?nome=Maria HTTP/1.1");
-  b = strpart(a, "=", "P/");
+  strcpy(a, "GET /printa?nome=Maria&valor=123 HTTP/1.1");
+  printf("1- %x %s\n", b, b);
+
+  b = strpart(a, "/", "?");
+  printf("2- %x %s\n", b, b);
+
+  b = strpart(a, "?", " HTTP/1.1");
+  printf("2- %x %s\n", b, b);
+
   if (b)
     printf("%s (%zu)\n", b, strlen(b));
   else
@@ -93,6 +100,7 @@ void getMemoryInfo()
 
   printNum(totalRAM);
   printNum(freeRAM);
+  printf("\n");
 }
 
 void printNum(long long numero)

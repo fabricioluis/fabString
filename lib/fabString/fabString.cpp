@@ -208,7 +208,8 @@ char *strpart(char *str1, const char *str2, const char *str3)
 int strpos(char *str1, const char *str2)
 {
   char *pos = strstr(str1, str2);
-  if (pos == NULL)
+
+  if (!pos)
     return -1;
 
   return pos - str1;
