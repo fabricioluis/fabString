@@ -50,11 +50,11 @@ int main()
   strcpy(a, "GET /printa?nome=Maria&valor=123 HTTP/1.1");
   printf("1- %x %s\n", b, b);
 
-  b = strpart(a, "/", "?");
-  printf("2- %x %s\n", b, b);
+  b = strpart(a, "?", "HTTP/1.1");
+  printf("2- %x (%s) %d\n", b, b, strlen(b));
 
   b = strpart(a, "?", " HTTP/1.1");
-  printf("2- %x %s\n", b, b);
+  printf("3- %x (%s) %d\n", b, b, strlen(b));
 
   if (b)
     printf("%s (%zu)\n", b, strlen(b));

@@ -76,7 +76,7 @@ char *stralltrim(char *str1)
   int j = 0;
 
   // Define tamanho do retorno a str1 sem os espacos.
-  char *retorno = (char *)malloc(tam - ctEspaco + 1);
+  char *retorno = (char *)malloc((tam - ctEspaco) + 1);
 
   for (size_t i = 0; i < strlen(str1); i++)
   {
@@ -180,7 +180,7 @@ char *strpart(char *str1, const char *str2, const char *str3)
   if (posStr2_F > posStr3_I)
     return NULL;
 
-  char *retorno = (char *)malloc((posStr3_I - posStr2_F) * sizeof(char));
+  char *retorno = (char *)malloc(((posStr3_I - posStr2_F) + 1) * sizeof(char));
   if (!retorno)
     return NULL;
 
