@@ -23,7 +23,7 @@ char *strlrtrim(char *str1);
 
 char *strpart(char *str1, const char *str2, const char *str3);
 
-int strpos(char *str1, const char *str2);
+int strpos(char *str1, const char *str2, int n = -1);
 
 int strposf(char *str1, const char *str2);
 

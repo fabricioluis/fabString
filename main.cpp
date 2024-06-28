@@ -4,8 +4,8 @@
 #include <iomanip>
 #include <iostream>
 
-#include "lib/fabString/fabString.h"
 #include "../../../../../usr/include/x86_64-linux-gnu/sys/time.h"
+#include "lib/fabString/fabString.h"
 
 void printNum(long long numero);
 void getMemoryInfo();
@@ -15,8 +15,7 @@ double get_microseconds();
 // 01234567890123456789012345678901234567890
 // GET /inclusao?nome=Maria&valor=123
 
-int main()
-{
+int main() {
   getMemoryInfo();
 
   char *a = (char *)malloc(50 * sizeof(char));
@@ -47,19 +46,17 @@ int main()
     printf("%zu - %s\n", i, substrend(a, i));
   }
 */
-  strcpy(a, "GET /printa?nome=Maria&valor=123 HTTP/1.1");
-  printf("1- %x %s\n", b, b);
+  strcpy(a, "name=\"arqEnviado\"; filename=\"teste.txt\"");
+  printf("1- %x %s\n", a, a);
 
-  b = strpart(a, "?", "HTTP/1.1");
+  int c = strpos(a, "\"");
+  printf("c1= %d\n", c);
+
+  c = strpos(a, "\"", 18);
+  printf("c2= %d\n", c);
+
+  b = strpart(a, "filename=\"", "\"");
   printf("2- %x (%s) %d\n", b, b, strlen(b));
-
-  b = strpart(a, "?", " HTTP/1.1");
-  printf("3- %x (%s) %d\n", b, b, strlen(b));
-
-  if (b)
-    printf("%s (%zu)\n", b, strlen(b));
-  else
-    printf("Nulo\n");
 
   /*
     free(b);
@@ -87,8 +84,7 @@ int main()
   printf("...Fim...\n");
 }
 
-void getMemoryInfo()
-{
+void getMemoryInfo() {
   long long totalRAM;
   long long freeRAM;
 
@@ -103,15 +99,13 @@ void getMemoryInfo()
   printf("\n");
 }
 
-void printNum(long long numero)
-{
+void printNum(long long numero) {
   printf("%3lld.%3lld.%3lld.%3lld\n", numero / 1000000000,
          (numero % 1000000000) / 1000000, (numero % 1000000) / 1000,
          numero % 1000);
 }
 
-double get_microseconds()
-{
+double get_microseconds() {
   struct timeval tv;
 
   gettimeofday(&tv, NULL);
